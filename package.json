@@ -27,6 +27,7 @@
     "@nestjs/swagger": "^4.5.3",
     "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "class-transformer": "^0.2.3",
+    "dotenv": "^8.2.0",
     "passport": "^0.4.1",
     "passport-google-oauth1": "^1.0.0",
     "passport-oauth1": "^1.1.0",

@@ -1,7 +1,7 @@
 //  ---------------------------------------------------------------------------------------------------------------------------
 
 import { HttpModule } from "@nestjs/common";
-import { EXAMPLE_CONSUMER_KEY, EXAMPLE_CONSUMER_SECRET } from "../../auth/constant/basic-info";
+// import { EXAMPLE_CONSUMER_KEY, EXAMPLE_CONSUMER_SECRET } from "../../auth/constant/basic-info";
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
 /**
@@ -19,10 +19,13 @@ export function getModuleHttp() {
   return baseModule;
 }
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const api = new WooCommerceRestApi({
-  url: "http://139.99.76.109:30002/",
-  consumerKey: EXAMPLE_CONSUMER_KEY,
-  consumerSecret: EXAMPLE_CONSUMER_SECRET,
+  url: process.env.URL_STORE,
+  consumerKey: process.env.CONSUMER_KEY,
+  consumerSecret: process.env.CONSUMER_SECRET,
   version: "wc/v3"
 });
 
