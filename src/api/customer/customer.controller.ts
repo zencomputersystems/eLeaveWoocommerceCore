@@ -1,15 +1,16 @@
 import { Controller, Get, Res, Post, Body, Param, Patch, Delete } from "@nestjs/common";
-import { ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 import { getWoocommerce } from "../../common/function/basic-function";
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from "./dto/update-customer.dto";
+import { DeleteCustomerDto } from './dto/delete-customer.dto';
 const api = getWoocommerce();
 
-@Controller('customer')
-// @UseGuards(AuthGuard('oauth'))
+@Controller('customers')
+@ApiTags('Customers')
 export class CustomerController {
-  @Post('customer')
-  @ApiOperation({ summary: 'create customer' })
+  @Post()
+  @ApiOperation({ summary: 'Create a customer' })
   createCustomer(@Body() data: CreateCustomerDto, @Res() res) {
     api.post('customers', data)
       .then((response) => {
@@ -22,12 +23,30 @@ export class CustomerController {
       });
   }
 
-  @Get('customer')
-  @ApiOperation({ summary: 'List all customer' })
-  getAllCustomer(@Res() res) {
-
+  @Get(':id')
+  @ApiOperation({ summary: 'Retrieve a customer' })
+  @ApiParam({ name: 'id', description: 'customer id', required: true })
+  getOneCustomer(@Param('id') id, @Res() res) {
 
     // List products
+    api.get("customers/" + id, {
+      per_page: 20, // 20 products per page
+    })
+      .then((response) => {
+        res.send(response.data);
+      })
+      .catch((error) => {
+        res.send(error.response.data);
+      })
+      .finally((result) => {
+      });
+
+  }
+
+  @Get()
+  @ApiOperation({ summary: 'List all customers' })
+  getAllCustomer(@Res() res) {
+
     api.get("customers", {
       per_page: 20, // 20 products per page
     })
@@ -54,28 +73,8 @@ export class CustomerController {
 
   }
 
-  @Get('customer/:id')
-  @ApiOperation({ summary: 'get customer' })
-  @ApiParam({ name: 'id', description: 'customer id', required: true })
-  getOneCustomer(@Param('id') id, @Res() res) {
-
-    // List products
-    api.get("customers/" + id, {
-      per_page: 20, // 20 products per page
-    })
-      .then((response) => {
-        res.send(response.data);
-      })
-      .catch((error) => {
-        res.send(error.response.data);
-      })
-      .finally((result) => {
-      });
-
-  }
-
-  @Patch('customer/:id')
-  @ApiOperation({ summary: 'update customer' })
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update a customer' })
   @ApiParam({ name: 'id', description: 'customer id', required: true })
   updateCustomer(@Body() data: UpdateCustomerDto, @Param('id') id, @Res() res) {
     api.put("customers/" + id, data)
@@ -89,11 +88,11 @@ export class CustomerController {
       });
   }
 
-  @Delete('customer/:id')
-  @ApiOperation({ summary: 'delete customer' })
+  @Delete(':id')
+  @ApiOperation({ summary: 'Delete a customer' })
   @ApiParam({ name: 'id', description: 'customer id', required: true })
-  deleteCustomer(@Param('id') id, @Res() res) {
-    api.delete("customers/" + id)
+  deleteCustomer(@Body() data: DeleteCustomerDto, @Param('id') id, @Res() res) {
+    api.delete("customers/" + id, data)
       .then((response) => {
         res.send(response.data);
       })
@@ -104,8 +103,8 @@ export class CustomerController {
       });
   }
 
-  @Post('customer/batch')
-  @ApiOperation({ summary: 'update customer by batch' })
+  @Post('batch')
+  @ApiOperation({ summary: 'Batch update customers' })
   batchUpdateCustomer(@Body() data, @Res() res) {
     api.post('customers/batch', data)
       .then((response) => {
@@ -116,6 +115,26 @@ export class CustomerController {
       })
       .finally((result) => {
       });
+  }
+
+  @Get('downloads/:id')
+  @ApiOperation({ summary: 'Retrieve customer downloads' })
+  @ApiParam({ name: 'id', description: 'customer id', required: true })
+  getCustomerDownload(@Param('id') id, @Res() res) {
+
+    // List products
+    api.get("customers/" + id + "/downloads", {
+      per_page: 20, // 20 products per page
+    })
+      .then((response) => {
+        res.send(response.data);
+      })
+      .catch((error) => {
+        res.send(error.response.data);
+      })
+      .finally((result) => {
+      });
+
   }
 
 }

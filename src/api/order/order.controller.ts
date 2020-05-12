@@ -1,23 +1,21 @@
-import { Controller, UseGuards, Get, Res, HttpService, Param, Query, Post, Body, Patch, Delete } from "@nestjs/common";
-import { AuthGuard } from '@nestjs/passport';
-import { ApiOperation, ApiBearerAuth, ApiQuery, ApiParam, ApiTags } from "@nestjs/swagger";
+import { Controller, Get, Res, Post, Body, Param, Patch, Delete } from "@nestjs/common";
+import { ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 import { getWoocommerce } from "../../common/function/basic-function";
-import { CreateCouponDto } from "./dto/create-coupon.dto";
-import { UpdateCouponDto } from "./dto/update-coupon.dto";
-import { DeleteCouponDto } from "./dto/delete-coupon.dto";
-import { BatchCouponDto } from "./dto/batch-coupon.dto";
+import { CreateOrderDto } from './dto/create-order.dto';
+import { UpdateOrderDto } from "./dto/update-order.dto";
+import { DeleteOrderDto } from './dto/delete-order.dto';
 const api = getWoocommerce();
 
-@Controller('coupons')
-@ApiTags('Coupons')
-export class CouponController {
-
+@Controller('orders')
+@ApiTags('Orders')
+export class OrderController {
   @Post()
-  @ApiOperation({ summary: 'Create a coupon' })
-  createCoupon(@Body() data: CreateCouponDto, @Res() res) {
-    api.post("coupons", data).then((response) => {
-      res.send(response.data);
-    })
+  @ApiOperation({ summary: 'Create an order' })
+  createOrder(@Body() data: CreateOrderDto, @Res() res) {
+    api.post('Orders', data)
+      .then((response) => {
+        res.send(response.data);
+      })
       .catch((error) => {
         res.send(error.response.data);
       })
@@ -26,11 +24,12 @@ export class CouponController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a coupon' })
-  @ApiParam({ name: 'id', description: 'Coupon id', required: true })
-  getOneCoupon(@Param('id') id, @Res() res) {
+  @ApiOperation({ summary: 'Retrieve an order' })
+  @ApiParam({ name: 'id', description: 'order id', required: true })
+  getOneOrder(@Param('id') id, @Res() res) {
 
-    api.get("coupons/" + id, {
+    // List products
+    api.get("Orders/" + id, {
       per_page: 20, // 20 products per page
     })
       .then((response) => {
@@ -45,11 +44,12 @@ export class CouponController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all coupons' })
-  getAllCoupon(@Res() res) {
+  @ApiOperation({ summary: 'List all orders' })
+  getAllOrder(@Res() res) {
+
 
     // List products
-    api.get("coupons", {
+    api.get("Orders", {
       per_page: 20, // 20 products per page
     })
       .then((response) => {
@@ -76,11 +76,10 @@ export class CouponController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a coupon' })
-  @ApiParam({ name: 'id', description: 'Coupon id', required: true })
-  updateCoupon(@Body() data: UpdateCouponDto, @Param('id') id, @Res() res) {
-
-    api.put("coupons/" + id, data)
+  @ApiOperation({ summary: 'Update an order' })
+  @ApiParam({ name: 'id', description: 'order id', required: true })
+  updateOrder(@Body() data: UpdateOrderDto, @Param('id') id, @Res() res) {
+    api.put("Orders/" + id, data)
       .then((response) => {
         res.send(response.data);
       })
@@ -89,15 +88,13 @@ export class CouponController {
       })
       .finally((result) => {
       });
-
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a coupon' })
-  @ApiParam({ name: 'id', description: 'Coupon id', required: true })
-  deleteCoupon(@Body() data: DeleteCouponDto, @Param('id') id, @Res() res) {
-
-    api.delete("coupons/" + id, data)
+  @ApiOperation({ summary: 'Delete an order' })
+  @ApiParam({ name: 'id', description: 'order id', required: true })
+  deleteOrder(@Body() data: DeleteOrderDto, @Param('id') id, @Res() res) {
+    api.delete("Orders/" + id, data)
       .then((response) => {
         res.send(response.data);
       })
@@ -106,15 +103,15 @@ export class CouponController {
       })
       .finally((result) => {
       });
-
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update coupons' })
-  batchUpdateCoupon(@Body() data: BatchCouponDto, @Res() res) {
-    api.post("coupons/batch", data).then((response) => {
-      res.send(response.data);
-    })
+  @ApiOperation({ summary: 'Batch update orders' })
+  batchUpdateOrder(@Body() data, @Res() res) {
+    api.post('Orders/batch', data)
+      .then((response) => {
+        res.send(response.data);
+      })
       .catch((error) => {
         res.send(error.response.data);
       })

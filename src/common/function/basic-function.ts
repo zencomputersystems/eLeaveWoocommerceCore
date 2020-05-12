@@ -1,12 +1,9 @@
 //  ---------------------------------------------------------------------------------------------------------------------------
 
 import { HttpModule } from "@nestjs/common";
-// import { EXAMPLE_CONSUMER_KEY, EXAMPLE_CONSUMER_SECRET } from "../../auth/constant/basic-info";
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
-/**
- * Declare httpmodule
- */
+/**  Declare httpmodule */
 const baseModule = HttpModule.register({ headers: { 'Content-Type': 'application/json' } });
 
 /**
@@ -31,4 +28,23 @@ const api = new WooCommerceRestApi({
 
 export function getWoocommerce() {
   return api;
+}
+
+export function runServiceQuery([method, endpoint, data, params, res]: [any, string, any, any, any]) {
+  let api = getWoocommerce();
+  if (method == 'post') { method = api.post(endpoint, data, params); }
+  else if (method == 'patch') { method = api.put(endpoint, data, params); }
+  else if (method == 'delete') { method = api.delete(endpoint, params); }
+  else { method = api.get(endpoint, params); }
+
+  method
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((error) => {
+      res.send(error.response.data);
+    })
+    .finally((result) => {
+    });
+
 }
