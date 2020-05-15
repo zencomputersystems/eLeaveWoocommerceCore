@@ -11,6 +11,22 @@ import { ProductVariationController } from "./product-variation/product-variatio
 import { ProductAttributeController } from "./product-attribute/product-attribute.controller";
 import { ProductAttributeTermController } from "./product-attribute-term/product-attribute-term.controller";
 import { ProductCategoryController } from "./product-category/product-category.controller";
+import { ProductShippingClassController } from "./product-shipping-class/product-shipping-class.controller";
+import { ProductTagController } from "./product-tag/product-tag.controller";
+import { ProductReviewController } from "./product-review/product-review.controller";
+import { ReportController } from "./report/report.controller";
+import { TaxRateController } from "./tax-rate/tax-rate.controller";
+import { TaxClassController } from "./tax-class/tax-class.controller";
+import { SettingController } from "./setting/setting.controller";
+import { SettingOptionController } from "./setting-option/setting-option.controller";
+import { PaymentGatewayController } from "./payment-gateway/payment-gateway.controller";
+import { ShippingZoneController } from "./shipping-zone/shipping-zone.controller";
+import { ShippingZoneLocationController } from "./shipping-zone-location/shipping-zone-location.controller";
+import { ShippingZoneMethodController } from "./shipping-zone-method/shipping-zone-method.controller";
+import { ShippingMethodController } from "./shipping-method/shipping-method.controller";
+import { SystemStatusController } from "./system-status/system-status.controller";
+import { SystemStatusToolController } from "./system-status-tool/system-status-tool.controller";
+import { DataController } from "./datas/data.controller";
 
 @Module({
   imports: [
@@ -26,7 +42,23 @@ import { ProductCategoryController } from "./product-category/product-category.c
     ProductVariationController,
     ProductAttributeController,
     ProductAttributeTermController,
-    ProductCategoryController
+    ProductCategoryController,
+    ProductShippingClassController,
+    ProductTagController,
+    ProductReviewController,
+    ReportController,
+    TaxRateController,
+    TaxClassController,
+    SettingController,
+    SettingOptionController,
+    PaymentGatewayController,
+    ShippingZoneController,
+    ShippingZoneLocationController,
+    ShippingZoneMethodController,
+    ShippingMethodController,
+    SystemStatusController,
+    SystemStatusToolController,
+    DataController
   ],
   providers: []
 })

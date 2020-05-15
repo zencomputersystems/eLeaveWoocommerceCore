@@ -3,7 +3,7 @@ import { ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 import { getWoocommerce } from "../../common/function/basic-function";
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from "./dto/update-order.dto";
-import { DeleteOrderDto } from './dto/delete-order.dto';
+import { DeleteDto } from "../../common/dto/delete.dto";
 const api = getWoocommerce();
 
 @Controller('orders')
@@ -93,7 +93,7 @@ export class OrderController {
   @Delete(':id')
   @ApiOperation({ summary: 'Delete an order' })
   @ApiParam({ name: 'id', description: 'order id', required: true })
-  deleteOrder(@Body() data: DeleteOrderDto, @Param('id') id, @Res() res) {
+  deleteOrder(@Body() data: DeleteDto, @Param('id') id, @Res() res) {
     api.delete("Orders/" + id, data)
       .then((response) => {
         res.send(response.data);

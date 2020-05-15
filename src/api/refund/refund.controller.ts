@@ -1,7 +1,7 @@
 import { Controller, Post, Param, Body, Res, Get, Delete } from "@nestjs/common";
 import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
-import { DeleteOrderDto } from "../order/dto/delete-order.dto";
+import { DeleteDto } from "../../common/dto/delete.dto";
 
 @ApiTags('Refunds')
 @Controller('refunds')
@@ -56,7 +56,7 @@ export class RefundController {
   @ApiOperation({ summary: 'Delete an order note' })
   @ApiParam({ name: 'id', description: 'Order notes id', required: true })
   @ApiParam({ name: 'refund_id', description: 'Refund id', required: true })
-  deleteRefund(@Param() params, @Body() data: DeleteOrderDto, @Res() res) {
+  deleteRefund(@Param() params, @Body() data: DeleteDto, @Res() res) {
 
     let method = 'delete';
     let endpoint = 'orders/' + params.id + '/refunds/' + params.note_id;

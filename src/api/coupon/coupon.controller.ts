@@ -1,6 +1,5 @@
-import { Controller, UseGuards, Get, Res, HttpService, Param, Query, Post, Body, Patch, Delete } from "@nestjs/common";
-import { AuthGuard } from '@nestjs/passport';
-import { ApiOperation, ApiBearerAuth, ApiQuery, ApiParam, ApiTags } from "@nestjs/swagger";
+import { Controller, Get, Res, Param, Post, Body, Patch, Delete } from "@nestjs/common";
+import { ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
 import { getWoocommerce } from "../../common/function/basic-function";
 import { CreateCouponDto } from "./dto/create-coupon.dto";
 import { UpdateCouponDto } from "./dto/update-coupon.dto";

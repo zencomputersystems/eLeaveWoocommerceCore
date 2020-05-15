@@ -1,7 +1,7 @@
 import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
 import { Controller, Post, Res, Param, Body, Get, Delete } from "@nestjs/common";
 import { runServiceQuery } from '../../common/function/basic-function';
-import { DeleteOrderDto } from "../order/dto/delete-order.dto";
+import { DeleteDto } from "../../common/dto/delete.dto";
 
 @ApiTags('Order notes')
 @Controller('order-notes')
@@ -100,7 +100,7 @@ export class OrderNotesController {
   @ApiOperation({ summary: 'Delete an order note' })
   @ApiParam({ name: 'id', description: 'Order notes id', required: true })
   @ApiParam({ name: 'note_id', description: 'Notes id', required: true })
-  deleteOrderNotes(@Param() params, @Body() data: DeleteOrderDto, @Res() res) {
+  deleteOrderNotes(@Param() params, @Body() data: DeleteDto, @Res() res) {
 
     let method = 'delete';
     let endpoint = 'orders/' + params.id + '/notes/' + params.note_id;
