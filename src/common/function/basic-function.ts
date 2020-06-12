@@ -48,3 +48,34 @@ export function runServiceQuery([method, endpoint, data, params, res]: [any, str
     });
 
 }
+
+
+const apiV1 = new WooCommerceRestApi({
+  url: process.env.URL_STORE,
+  consumerKey: process.env.CONSUMER_KEY,
+  consumerSecret: process.env.CONSUMER_SECRET,
+  version: "wc/v1"
+});
+
+export function getWoocommerceV1() {
+  return apiV1;
+}
+
+export function runServiceQueryV1([method, endpoint, data, params, res]: [any, string, any, any, any]) {
+  let api = getWoocommerceV1();
+  if (method == 'post') { method = api.post(endpoint, data, params); }
+  else if (method == 'patch') { method = api.put(endpoint, data, params); }
+  else if (method == 'delete') { method = api.delete(endpoint, params); }
+  else { method = api.get(endpoint, params); }
+
+  method
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((error) => {
+      res.send(error.response.data);
+    })
+    .finally((result) => {
+    });
+
+}

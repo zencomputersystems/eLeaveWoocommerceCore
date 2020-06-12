@@ -10,7 +10,7 @@ export class ProductReviewController {
   @ApiOperation({ summary: 'Create a product review' })
   createProductShippingClasss(@Body() data: any, @Res() res) {
     const data1 = {
-      product_id: 22,
+      product_id: 242,
       review: "Nice album!",
       reviewer: "John Doe",
       reviewer_email: "john.doe@example.com",

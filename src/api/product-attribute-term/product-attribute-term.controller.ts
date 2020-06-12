@@ -8,7 +8,7 @@ import { DeleteDto } from "../../common/dto/delete.dto";
 export class ProductAttributeTermController {
   @Post(':id')
   @ApiOperation({ summary: 'Create a product attribute' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiParam({ name: 'id', description: 'Attribute id', required: true })
   createProductattributes(@Param() params, @Body() data: any, @Res() res) {
     const data1 = {
       name: "XXS"

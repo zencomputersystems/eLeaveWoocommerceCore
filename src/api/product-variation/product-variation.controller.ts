@@ -13,7 +13,7 @@ export class ProductVariationController {
     const data1 = {
       regular_price: "9.00",
       image: {
-        id: 423
+        id: 240
       },
       attributes: [
         {

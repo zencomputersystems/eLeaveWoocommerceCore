@@ -27,6 +27,9 @@ import { ShippingMethodController } from "./shipping-method/shipping-method.cont
 import { SystemStatusController } from "./system-status/system-status.controller";
 import { SystemStatusToolController } from "./system-status-tool/system-status-tool.controller";
 import { DataController } from "./datas/data.controller";
+import { SubscriptionController } from "./subscription/subscription.controller";
+import { SubscriptionOrderController } from "./subscription-order/subscription-order.controller";
+import { SubscriptionNoteController } from "./subscription-note/subscription-note.controller";
 
 @Module({
   imports: [
@@ -58,7 +61,10 @@ import { DataController } from "./datas/data.controller";
     ShippingMethodController,
     SystemStatusController,
     SystemStatusToolController,
-    DataController
+    DataController,
+    SubscriptionController,
+    SubscriptionOrderController,
+    SubscriptionNoteController
   ],
   providers: []
 })
