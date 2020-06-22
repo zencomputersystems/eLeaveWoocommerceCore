@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Res, Get, Delete, Param } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Tax class')
+@ApiUseTags('Tax class')
 @Controller('tax-class')
 export class TaxClassController {
   @Post()
-  @ApiOperation({ summary: 'Create a tax rate' })
+  @ApiOperation({ title: 'Create a tax rate' })
   createTaxClass(@Body() data: any, @Res() res) {
     const data1 = {
       name: "Zero Rate"
@@ -22,7 +22,7 @@ export class TaxClassController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all tax class' })
+  @ApiOperation({ title: 'List all tax class' })
   getAllTaxClass(@Res() res) {
 
     let method = 'get';
@@ -35,8 +35,8 @@ export class TaxClassController {
   }
 
   @Delete(':slog')
-  @ApiOperation({ summary: 'Delete a tax class' })
-  @ApiParam({ name: 'slug', description: 'tax rate id', required: true })
+  @ApiOperation({ title: 'Delete a tax class' })
+  @ApiImplicitParam({ name: 'slug', description: 'tax rate id', required: true })
   deleteTaxClass(@Body() data: DeleteDto, @Param('slug') slug, @Res() res) {
     const data1 = {
       force: true

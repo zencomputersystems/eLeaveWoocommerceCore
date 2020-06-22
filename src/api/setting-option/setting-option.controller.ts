@@ -1,14 +1,14 @@
-import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { Controller, Get, Res, Param, Patch, Body, Post } from "@nestjs/common";
 import { runServiceQuery } from "../../common/function/basic-function";
 
-@ApiTags('Setting option')
+@ApiUseTags('Setting option')
 @Controller('setting-option')
 export class SettingOptionController {
   @Get(':group_id/:id')
-  @ApiOperation({ summary: 'Retrieve a setting option' })
-  @ApiParam({ name: 'group_id', description: 'group id', required: true, example: 'general' })
-  @ApiParam({ name: 'id', description: 'id', required: true, example: 'woocommerce_allowed_countries' })
+  @ApiOperation({ title: 'Retrieve a setting option' })
+  @ApiImplicitParam({ name: 'group_id', description: 'group id', required: true, enum: 'general' })
+  @ApiImplicitParam({ name: 'id', description: 'id', required: true, enum: 'woocommerce_allowed_countries' })
   getOneSettingOption(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -21,8 +21,8 @@ export class SettingOptionController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'List all settings groups' })
-  @ApiParam({ name: 'id', description: 'id', required: true, example: 'general' })
+  @ApiOperation({ title: 'List all settings groups' })
+  @ApiImplicitParam({ name: 'id', description: 'id', required: true, enum: 'general' })
   getAllSettingOption(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -35,9 +35,9 @@ export class SettingOptionController {
   }
 
   @Patch(':group_id/:id')
-  @ApiOperation({ summary: 'Update a setting option' })
-  @ApiParam({ name: 'group_id', description: 'Group id', required: true })
-  @ApiParam({ name: 'id', description: 'Id', required: true })
+  @ApiOperation({ title: 'Update a setting option' })
+  @ApiImplicitParam({ name: 'group_id', description: 'Group id', required: true })
+  @ApiImplicitParam({ name: 'id', description: 'Id', required: true })
   updateSettingOption(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       value: "all_except"
@@ -53,8 +53,8 @@ export class SettingOptionController {
   }
 
   @Post(':id')
-  @ApiOperation({ summary: 'Create a product variation' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Create a product variation' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   batchUpdateSettingOption(@Param('id') id, @Body() data: any, @Res() res) {
     const data1 = {
       create: [

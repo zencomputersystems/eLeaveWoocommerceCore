@@ -1,13 +1,13 @@
 import { Controller, Get, Param, Res, Patch, Body } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { runServiceQuery } from "../../common/function/basic-function";
 
-@ApiTags('Payment gateway')
+@ApiUseTags('Payment gateway')
 @Controller('payment-gateway')
 export class PaymentGatewayController {
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a payment gateway' })
-  @ApiParam({ name: 'id', description: 'id', required: true })
+  @ApiOperation({ title: 'Retrieve a payment gateway' })
+  @ApiImplicitParam({ name: 'id', description: 'id', required: true })
   getOnePaymentGateway(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -20,7 +20,7 @@ export class PaymentGatewayController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all payment gateway' })
+  @ApiOperation({ title: 'List all payment gateway' })
   getAllPaymentGateway(@Res() res) {
 
     let method = 'get';
@@ -33,8 +33,8 @@ export class PaymentGatewayController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a payment gateway' })
-  @ApiParam({ name: 'id', description: 'Id', required: true })
+  @ApiOperation({ title: 'Update a payment gateway' })
+  @ApiImplicitParam({ name: 'id', description: 'Id', required: true })
   updatePaymentGateway(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       enabled: true

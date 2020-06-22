@@ -1,12 +1,12 @@
 import { Controller, Get, Res } from "@nestjs/common";
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation } from '@nestjs/swagger';
 import { runServiceQuery } from "../../common/function/basic-function";
 
-@ApiTags('System status')
+@ApiUseTags('System status')
 @Controller('system-status')
 export class SystemStatusController {
   @Get()
-  @ApiOperation({ summary: 'List all system status items' })
+  @ApiOperation({ title: 'List all system status items' })
   getAllShippingMethod(@Res() res) {
 
     let method = 'get';

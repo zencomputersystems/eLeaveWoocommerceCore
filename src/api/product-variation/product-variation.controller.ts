@@ -1,14 +1,14 @@
 import { Controller, Post, Body, Res, Get, Param, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Product variations')
+@ApiUseTags('Product variations')
 @Controller('product-variations')
 export class ProductVariationController {
   @Post(':id')
-  @ApiOperation({ summary: 'Create a product variation' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Create a product variation' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   createProductVariations(@Param('id') id, @Body() data: any, @Res() res) {
     const data1 = {
       regular_price: "9.00",
@@ -33,9 +33,9 @@ export class ProductVariationController {
   }
 
   @Get(':id/:variation_id')
-  @ApiOperation({ summary: 'Retrieve a product variations' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
-  @ApiParam({ name: 'variation_id', description: 'Variations id', required: true })
+  @ApiOperation({ title: 'Retrieve a product variations' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
+  @ApiImplicitParam({ name: 'variation_id', description: 'Variations id', required: true })
   getOneProductVariations(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -48,8 +48,8 @@ export class ProductVariationController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'List all product variationss' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'List all product variationss' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   getAllProductVariations(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -62,9 +62,9 @@ export class ProductVariationController {
   }
 
   @Patch(':id/:variation_id')
-  @ApiOperation({ summary: 'Update a product variations' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
-  @ApiParam({ name: 'variation_id', description: 'Variations id', required: true })
+  @ApiOperation({ title: 'Update a product variations' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
+  @ApiImplicitParam({ name: 'variation_id', description: 'Variations id', required: true })
   updateProductVariations(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       regular_price: "10.00"
@@ -80,9 +80,9 @@ export class ProductVariationController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a product-variations' })
-  @ApiParam({ name: 'id', description: 'product-variations id', required: true })
-  @ApiParam({ name: 'variation_id', description: 'Variations id', required: true })
+  @ApiOperation({ title: 'Delete a product-variations' })
+  @ApiImplicitParam({ name: 'id', description: 'product-variations id', required: true })
+  @ApiImplicitParam({ name: 'variation_id', description: 'Variations id', required: true })
   deleteProductVariations(@Body() data: DeleteDto, @Param() params, @Res() res) {
     const data1 = {
       force: true
@@ -97,8 +97,8 @@ export class ProductVariationController {
   }
 
   @Post('batch/:id')
-  @ApiOperation({ summary: 'Batch update product variationss' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Batch update product variationss' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   batchUpdateProductVariations(@Param() params, @Body() data, @Res() res) {
     const data1 = {
       create: [

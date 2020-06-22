@@ -1,15 +1,15 @@
 import { Controller, Post, Param, Body, Res, Get, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Refunds')
+@ApiUseTags('Refunds')
 @Controller('refunds')
 export class RefundController {
 
   @Post(':id')
-  @ApiOperation({ summary: 'Create a refund' })
-  @ApiParam({ name: 'id', description: 'Order id', required: true })
+  @ApiOperation({ title: 'Create a refund' })
+  @ApiImplicitParam({ name: 'id', description: 'Order id', required: true })
   createRefund(@Param('id') id, @Body() data: any, @Res() res) {
     const data1 = {
       amount: "100"
@@ -24,9 +24,9 @@ export class RefundController {
   }
 
   @Get(':id/:refund_id')
-  @ApiOperation({ summary: 'Retrieve an order note' })
-  @ApiParam({ name: 'id', description: 'Order id', required: true })
-  @ApiParam({ name: 'refund_id', description: 'Refund id', required: true })
+  @ApiOperation({ title: 'Retrieve an order note' })
+  @ApiImplicitParam({ name: 'id', description: 'Order id', required: true })
+  @ApiImplicitParam({ name: 'refund_id', description: 'Refund id', required: true })
   getOneRefund(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -39,8 +39,8 @@ export class RefundController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'List all order notes' })
-  @ApiParam({ name: 'id', description: 'Order id', required: true })
+  @ApiOperation({ title: 'List all order notes' })
+  @ApiImplicitParam({ name: 'id', description: 'Order id', required: true })
   getAllRefunds(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -53,9 +53,9 @@ export class RefundController {
   }
 
   @Delete(':id/:refund_id')
-  @ApiOperation({ summary: 'Delete an order note' })
-  @ApiParam({ name: 'id', description: 'Order notes id', required: true })
-  @ApiParam({ name: 'refund_id', description: 'Refund id', required: true })
+  @ApiOperation({ title: 'Delete an order note' })
+  @ApiImplicitParam({ name: 'id', description: 'Order notes id', required: true })
+  @ApiImplicitParam({ name: 'refund_id', description: 'Refund id', required: true })
   deleteRefund(@Param() params, @Body() data: DeleteDto, @Res() res) {
 
     let method = 'delete';

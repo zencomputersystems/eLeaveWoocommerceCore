@@ -1,12 +1,12 @@
 import { Controller, Get, Res } from "@nestjs/common";
-import { ApiTags, ApiOperation } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 
-@ApiTags('Setting')
+@ApiUseTags('Setting')
 @Controller('setting')
 export class SettingController {
   @Get()
-  @ApiOperation({ summary: 'List all settings groups' })
+  @ApiOperation({ title: 'List all settings groups' })
   getAllSetting(@Res() res) {
 
     let method = 'get';

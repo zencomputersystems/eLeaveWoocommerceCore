@@ -1,13 +1,13 @@
 import { Controller, Post, Param, Body, Res, Get, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Product category')
+@ApiUseTags('Product category')
 @Controller('product-category')
 export class ProductCategoryController {
   @Post()
-  @ApiOperation({ summary: 'Create a product category' })
+  @ApiOperation({ title: 'Create a product category' })
   createProductcategorys(@Body() data: any, @Res() res) {
     const data1 = {
       name: "Clothing",
@@ -26,8 +26,8 @@ export class ProductCategoryController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a product category' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Retrieve a product category' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   getOneProductcategorys(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -40,7 +40,7 @@ export class ProductCategoryController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all product categories' })
+  @ApiOperation({ title: 'List all product categories' })
   getAllProductcategorys(@Res() res) {
 
     let method = 'get';
@@ -53,8 +53,8 @@ export class ProductCategoryController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a product categorys' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Update a product categorys' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   updateProductcategorys(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       description: "All kinds of clothes."
@@ -70,8 +70,8 @@ export class ProductCategoryController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a product-categorys' })
-  @ApiParam({ name: 'id', description: 'product-categorys id', required: true })
+  @ApiOperation({ title: 'Delete a product-categorys' })
+  @ApiImplicitParam({ name: 'id', description: 'product-categorys id', required: true })
   deleteProductcategorys(@Body() data: DeleteDto, @Param() params, @Res() res) {
     const data1 = {
       force: true
@@ -86,7 +86,7 @@ export class ProductCategoryController {
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update product categoryss' })
+  @ApiOperation({ title: 'Batch update product categoryss' })
   batchUpdateProductcategorys(@Param() params, @Body() data, @Res() res) {
     const data1 = {
       create: [

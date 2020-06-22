@@ -1,14 +1,14 @@
 import { Controller, Post, Body, Res, Get, Param, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Shipping zone method')
+@ApiUseTags('Shipping zone method')
 @Controller('shipping-zone-method')
 export class ShippingZoneMethodController {
   @Post(':id')
-  @ApiOperation({ summary: 'Create a shipping zone' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Create a shipping zone' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   createShippingZoneMethod(@Param() params, @Body() data: any, @Res() res) {
     const data1 = {
       method_id: "flat_rate"
@@ -24,9 +24,9 @@ export class ShippingZoneMethodController {
   }
 
   @Get(':zone_id/:id')
-  @ApiOperation({ summary: 'Retrieve a shipping zone' })
-  @ApiParam({ name: 'zone_id', description: 'Zone id', required: true })
-  @ApiParam({ name: 'id', description: 'Id', required: true })
+  @ApiOperation({ title: 'Retrieve a shipping zone' })
+  @ApiImplicitParam({ name: 'zone_id', description: 'Zone id', required: true })
+  @ApiImplicitParam({ name: 'id', description: 'Id', required: true })
   getOneShippingZoneMethod(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -39,8 +39,8 @@ export class ShippingZoneMethodController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'List all shipping zones' })
-  @ApiParam({ name: 'id', description: 'Id', required: true })
+  @ApiOperation({ title: 'List all shipping zones' })
+  @ApiImplicitParam({ name: 'id', description: 'Id', required: true })
   getAllShippingZonesMethod(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -53,9 +53,9 @@ export class ShippingZoneMethodController {
   }
 
   @Patch(':zone_id/:id')
-  @ApiOperation({ summary: 'Update a product variations' })
-  @ApiParam({ name: 'id', description: 'Id', required: true })
-  @ApiParam({ name: 'zone_id', description: 'Zone id', required: true })
+  @ApiOperation({ title: 'Update a product variations' })
+  @ApiImplicitParam({ name: 'id', description: 'Id', required: true })
+  @ApiImplicitParam({ name: 'zone_id', description: 'Zone id', required: true })
   updateShippingZonesMethod(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       settings: {
@@ -73,9 +73,9 @@ export class ShippingZoneMethodController {
   }
 
   @Delete(':zone_id/:id')
-  @ApiOperation({ summary: 'Delete a product-variations' })
-  @ApiParam({ name: 'id', description: 'Id', required: true })
-  @ApiParam({ name: 'zone_id', description: 'Zone id', required: true })
+  @ApiOperation({ title: 'Delete a product-variations' })
+  @ApiImplicitParam({ name: 'id', description: 'Id', required: true })
+  @ApiImplicitParam({ name: 'zone_id', description: 'Zone id', required: true })
   deleteShippingZonesMethod(@Body() data: DeleteDto, @Param() params, @Res() res) {
 
     let method = 'delete';

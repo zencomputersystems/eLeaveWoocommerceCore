@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Res, Get, Param, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Webhook')
+@ApiUseTags('Webhook')
 @Controller('webhook')
 export class WebhookController {
   @Post()
-  @ApiOperation({ summary: 'Create a webhook' })
+  @ApiOperation({ title: 'Create a webhook' })
   createTaxRate(@Body() data: any, @Res() res) {
     const data1 = {
       name: "Order updated",
@@ -24,8 +24,8 @@ export class WebhookController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a webhook' })
-  @ApiParam({ name: 'id', description: 'webhook id', required: true })
+  @ApiOperation({ title: 'Retrieve a webhook' })
+  @ApiImplicitParam({ name: 'id', description: 'webhook id', required: true })
   getOneTaxRate(@Param('id') id, @Res() res) {
 
     let method = 'get';
@@ -38,7 +38,7 @@ export class WebhookController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all webhooks' })
+  @ApiOperation({ title: 'List all webhooks' })
   getAllTaxRate(@Res() res) {
 
     let method = 'get';
@@ -51,8 +51,8 @@ export class WebhookController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a webhook' })
-  @ApiParam({ name: 'id', description: 'webhook id', required: true })
+  @ApiOperation({ title: 'Update a webhook' })
+  @ApiImplicitParam({ name: 'id', description: 'webhook id', required: true })
   updateTaxRate(@Body() data: any, @Param('id') id, @Res() res) {
     const data1 = {
       status: "paused"
@@ -67,8 +67,8 @@ export class WebhookController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a webhook' })
-  @ApiParam({ name: 'id', description: 'webhook id', required: true })
+  @ApiOperation({ title: 'Delete a webhook' })
+  @ApiImplicitParam({ name: 'id', description: 'webhook id', required: true })
   deleteTaxRate(@Body() data: DeleteDto, @Param('id') id, @Res() res) {
     const data1 = {
       force: true
@@ -83,7 +83,7 @@ export class WebhookController {
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update webhooks' })
+  @ApiOperation({ title: 'Batch update webhooks' })
   batchUpdateTaxRate(@Body() data, @Res() res) {
     const data1 = {
       create: [

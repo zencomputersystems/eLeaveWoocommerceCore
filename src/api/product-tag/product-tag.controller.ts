@@ -1,13 +1,13 @@
 import { Controller, Post, Param, Body, Res, Delete, Patch, Get } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Product tag')
+@ApiUseTags('Product tag')
 @Controller('product-tag')
 export class ProductTagController {
   @Post()
-  @ApiOperation({ summary: 'Create a product tag' })
+  @ApiOperation({ title: 'Create a product tag' })
   createProductShippingClasss(@Body() data: any, @Res() res) {
     const data1 = {
       name: "Leather Shoes"
@@ -23,8 +23,8 @@ export class ProductTagController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a product tag' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Retrieve a product tag' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   getOneProductShippingClasss(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -37,7 +37,7 @@ export class ProductTagController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all product tages' })
+  @ApiOperation({ title: 'List all product tages' })
   getAllProductShippingClasss(@Res() res) {
 
     let method = 'get';
@@ -50,8 +50,8 @@ export class ProductTagController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a product tags' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Update a product tags' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   updateProductShippingClasss(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       description: "Genuine leather."
@@ -67,8 +67,8 @@ export class ProductTagController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a product-tags' })
-  @ApiParam({ name: 'id', description: 'product-shipping_classs id', required: true })
+  @ApiOperation({ title: 'Delete a product-tags' })
+  @ApiImplicitParam({ name: 'id', description: 'product-shipping_classs id', required: true })
   deleteProductShippingClasss(@Body() data: DeleteDto, @Param() params, @Res() res) {
     const data1 = {
       force: true
@@ -83,7 +83,7 @@ export class ProductTagController {
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update product tagss' })
+  @ApiOperation({ title: 'Batch update product tagss' })
   batchUpdateProductShippingClasss(@Param() params, @Body() data, @Res() res) {
     const data1 = {
       create: [

@@ -1,13 +1,13 @@
 import { Controller, Post, Param, Body, Res, Get, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Shipping zone')
+@ApiUseTags('Shipping zone')
 @Controller('shipping-zone')
 export class ShippingZoneController {
   @Post()
-  @ApiOperation({ summary: 'Create a shipping zone' })
+  @ApiOperation({ title: 'Create a shipping zone' })
   createShippingZone(@Body() data: any, @Res() res) {
     const data1 = {
       name: "Brazil"
@@ -23,8 +23,8 @@ export class ShippingZoneController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a shipping zone' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Retrieve a shipping zone' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   getOneShippingZone(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -37,7 +37,7 @@ export class ShippingZoneController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all shipping zones' })
+  @ApiOperation({ title: 'List all shipping zones' })
   getAllShippingZones(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -50,8 +50,8 @@ export class ShippingZoneController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a product variations' })
-  @ApiParam({ name: 'id', description: 'Zone id', required: true })
+  @ApiOperation({ title: 'Update a product variations' })
+  @ApiImplicitParam({ name: 'id', description: 'Zone id', required: true })
   updateShippingZones(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       order: 1
@@ -67,8 +67,8 @@ export class ShippingZoneController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a product-variations' })
-  @ApiParam({ name: 'id', description: 'product-variations id', required: true })
+  @ApiOperation({ title: 'Delete a product-variations' })
+  @ApiImplicitParam({ name: 'id', description: 'product-variations id', required: true })
   deleteShippingZones(@Body() data: DeleteDto, @Param() params, @Res() res) {
 
     let method = 'delete';

@@ -1,14 +1,14 @@
 import { Controller, Post, Body, Res, Get, Param, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { runServiceQueryV1 } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 import { UpdateSubscriptionDto } from "./dto/update-subscription.dto";
 
-@ApiTags('Subscription')
+@ApiUseTags('Subscription')
 @Controller('subscription')
 export class SubscriptionController {
   @Post()
-  @ApiOperation({ summary: 'Create a subscription' })
+  @ApiOperation({ title: 'Create a subscription' })
   createSubscription(@Body() data: any, @Res() res) {
     const data1 = {
       customer_id: 1,
@@ -75,8 +75,8 @@ export class SubscriptionController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a subscription' })
-  @ApiParam({ name: 'id', description: 'subscription id', required: true })
+  @ApiOperation({ title: 'Retrieve a subscription' })
+  @ApiImplicitParam({ name: 'id', description: 'subscription id', required: true })
   getOneSubscription(@Param('id') id, @Res() res) {
 
     let method = 'get';
@@ -89,7 +89,7 @@ export class SubscriptionController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all subscriptions' })
+  @ApiOperation({ title: 'List all subscriptions' })
   getAllSubscription(@Res() res) {
 
     let method = 'get';
@@ -102,8 +102,8 @@ export class SubscriptionController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a subscription' })
-  @ApiParam({ name: 'id', description: 'Subscription id', required: true })
+  @ApiOperation({ title: 'Update a subscription' })
+  @ApiImplicitParam({ name: 'id', description: 'Subscription id', required: true })
   updateSubscription(@Body() data: UpdateSubscriptionDto, @Param('id') id, @Res() res) {
     let lineItems = [{
       name: "FOC Ala carte",
@@ -138,8 +138,8 @@ export class SubscriptionController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a subscription' })
-  @ApiParam({ name: 'id', description: 'Subscription id', required: true })
+  @ApiOperation({ title: 'Delete a subscription' })
+  @ApiImplicitParam({ name: 'id', description: 'Subscription id', required: true })
   deleteSubscription(@Body() data: DeleteDto, @Param('id') id, @Res() res) {
     const data1 = {
       force: true
@@ -154,7 +154,7 @@ export class SubscriptionController {
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update subscriptions' })
+  @ApiOperation({ title: 'Batch update subscriptions' })
   updateBatchSubscription(@Body() data: any, @Res() res) {
     const data1 = {
       create: [
@@ -268,7 +268,7 @@ export class SubscriptionController {
   }
 
   @Get('statuses')
-  @ApiOperation({ summary: 'Get statuses subscriptions' })
+  @ApiOperation({ title: 'Get statuses subscriptions' })
   getStatusesSubscription(@Res() res) {
 
     let method = 'get';

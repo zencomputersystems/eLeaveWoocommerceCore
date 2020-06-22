@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Res, Get, Param, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Product review')
+@ApiUseTags('Product review')
 @Controller('product-review')
 export class ProductReviewController {
   @Post()
-  @ApiOperation({ summary: 'Create a product review' })
+  @ApiOperation({ title: 'Create a product review' })
   createProductShippingClasss(@Body() data: any, @Res() res) {
     const data1 = {
       product_id: 242,
@@ -27,8 +27,8 @@ export class ProductReviewController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a product review' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Retrieve a product review' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   getOneProductShippingClasss(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -41,7 +41,7 @@ export class ProductReviewController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all product reviewes' })
+  @ApiOperation({ title: 'List all product reviewes' })
   getAllProductShippingClasss(@Res() res) {
 
     let method = 'get';
@@ -54,8 +54,8 @@ export class ProductReviewController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a product reviews' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Update a product reviews' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
   updateProductShippingClasss(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       rating: 5
@@ -71,8 +71,8 @@ export class ProductReviewController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a product-reviews' })
-  @ApiParam({ name: 'id', description: 'product-shipping_classs id', required: true })
+  @ApiOperation({ title: 'Delete a product-reviews' })
+  @ApiImplicitParam({ name: 'id', description: 'product-shipping_classs id', required: true })
   deleteProductShippingClasss(@Body() data: DeleteDto, @Param() params, @Res() res) {
     const data1 = {
       force: true
@@ -87,7 +87,7 @@ export class ProductReviewController {
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update product reviewss' })
+  @ApiOperation({ title: 'Batch update product reviewss' })
   batchUpdateProductShippingClasss(@Param() params, @Body() data, @Res() res) {
     const data1 = {
       create: [

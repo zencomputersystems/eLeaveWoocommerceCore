@@ -1,14 +1,14 @@
 import { Controller, Delete, Body, Param, Res, Get, Post } from "@nestjs/common";
-import { ApiTags, ApiParam, ApiOperation } from '@nestjs/swagger';
+import { ApiUseTags, ApiImplicitParam, ApiOperation } from '@nestjs/swagger';
 import { runServiceQueryV1 } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Subscription note')
+@ApiUseTags('Subscription note')
 @Controller('subscription-note')
 export class SubscriptionNoteController {
   @Post(':id')
-  @ApiOperation({ summary: 'Create a subscription note' })
-  @ApiParam({ name: 'id', description: 'subscription id', required: true })
+  @ApiOperation({ title: 'Create a subscription note' })
+  @ApiImplicitParam({ name: 'id', description: 'subscription id', required: true })
   createSubscriptionNote(@Param() params, @Body() data: any, @Res() res) {
     const data1 = {
       note: 'Subscription ok!!!'
@@ -23,9 +23,9 @@ export class SubscriptionNoteController {
   }
 
   @Get(':id/:note_id')
-  @ApiOperation({ summary: 'Retrieve a subscription note' })
-  @ApiParam({ name: 'id', description: 'subscription id', required: true })
-  @ApiParam({ name: 'note_id', description: 'subscription note id', required: true })
+  @ApiOperation({ title: 'Retrieve a subscription note' })
+  @ApiImplicitParam({ name: 'id', description: 'subscription id', required: true })
+  @ApiImplicitParam({ name: 'note_id', description: 'subscription note id', required: true })
   getOneSubscriptionNote(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -38,8 +38,8 @@ export class SubscriptionNoteController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'List all subscription notes' })
-  @ApiParam({ name: 'id', description: 'subscription id', required: true })
+  @ApiOperation({ title: 'List all subscription notes' })
+  @ApiImplicitParam({ name: 'id', description: 'subscription id', required: true })
   getAllSubscriptionNote(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -52,9 +52,9 @@ export class SubscriptionNoteController {
   }
 
   @Delete(':id/:note_id')
-  @ApiOperation({ summary: 'Delete a subscription' })
-  @ApiParam({ name: 'id', description: 'Subscription id', required: true })
-  @ApiParam({ name: 'note_id', description: 'subscription note id', required: true })
+  @ApiOperation({ title: 'Delete a subscription' })
+  @ApiImplicitParam({ name: 'id', description: 'Subscription id', required: true })
+  @ApiImplicitParam({ name: 'note_id', description: 'subscription note id', required: true })
   deleteSubscriptionNote(@Body() data: DeleteDto, @Param() params, @Res() res) {
     const data1 = {
       force: true

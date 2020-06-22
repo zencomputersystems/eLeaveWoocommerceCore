@@ -1,14 +1,14 @@
 import { Controller, Post, Body, Res, Get, Param, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Product attribute terms')
+@ApiUseTags('Product attribute terms')
 @Controller('product-attribute-term')
 export class ProductAttributeTermController {
   @Post(':id')
-  @ApiOperation({ summary: 'Create a product attribute' })
-  @ApiParam({ name: 'id', description: 'Attribute id', required: true })
+  @ApiOperation({ title: 'Create a product attribute' })
+  @ApiImplicitParam({ name: 'id', description: 'Attribute id', required: true })
   createProductattributes(@Param() params, @Body() data: any, @Res() res) {
     const data1 = {
       name: "XXS"
@@ -24,9 +24,9 @@ export class ProductAttributeTermController {
   }
 
   @Get(':id/:attribute_id')
-  @ApiOperation({ summary: 'Retrieve a product attribute' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
-  @ApiParam({ name: 'attribute_id', description: 'Product attribute id', required: true })
+  @ApiOperation({ title: 'Retrieve a product attribute' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
+  @ApiImplicitParam({ name: 'attribute_id', description: 'Product attribute id', required: true })
   getOneProductattributes(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -39,8 +39,8 @@ export class ProductAttributeTermController {
   }
 
   @Get(':attribute_id')
-  @ApiOperation({ summary: 'List all product attributess' })
-  @ApiParam({ name: 'attribute_id', description: 'Product attribute id', required: true })
+  @ApiOperation({ title: 'List all product attributess' })
+  @ApiImplicitParam({ name: 'attribute_id', description: 'Product attribute id', required: true })
   getAllProductattributes(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -53,9 +53,9 @@ export class ProductAttributeTermController {
   }
 
   @Patch(':id/:attribute_id')
-  @ApiOperation({ summary: 'Update a product attributes' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true })
-  @ApiParam({ name: 'attribute_id', description: 'attributes id', required: true })
+  @ApiOperation({ title: 'Update a product attributes' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true })
+  @ApiImplicitParam({ name: 'attribute_id', description: 'attributes id', required: true })
   updateProductattributes(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       name: "XXS"
@@ -71,9 +71,9 @@ export class ProductAttributeTermController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a product-attributes' })
-  @ApiParam({ name: 'id', description: 'product-attributes id', required: true })
-  @ApiParam({ name: 'attribute_id', description: 'attributes id', required: true })
+  @ApiOperation({ title: 'Delete a product-attributes' })
+  @ApiImplicitParam({ name: 'id', description: 'product-attributes id', required: true })
+  @ApiImplicitParam({ name: 'attribute_id', description: 'attributes id', required: true })
   deleteProductattributes(@Body() data: DeleteDto, @Param() params, @Res() res) {
     const data1 = {
       force: true
@@ -88,8 +88,8 @@ export class ProductAttributeTermController {
   }
 
   @Post('batch/:attribute_id')
-  @ApiOperation({ summary: 'Batch update product attributess' })
-  @ApiParam({ name: 'attribute_id', description: 'Product id', required: true })
+  @ApiOperation({ title: 'Batch update product attributess' })
+  @ApiImplicitParam({ name: 'attribute_id', description: 'Product id', required: true })
   batchUpdateProductattributes(@Param() params, @Body() data, @Res() res) {
     const data1 = {
       create: [

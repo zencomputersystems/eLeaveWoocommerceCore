@@ -1,13 +1,13 @@
 import { Controller, Get, Param, Res } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { runServiceQuery } from "../../common/function/basic-function";
 
-@ApiTags('Shipping method')
+@ApiUseTags('Shipping method')
 @Controller('shipping-method')
 export class ShippingMethodController {
   @Get(':id')
-  @ApiOperation({ summary: 'List all shipping zones' })
-  @ApiParam({ name: 'id', description: 'Id', required: true, example: 'flat-rate' })
+  @ApiOperation({ title: 'List all shipping zones' })
+  @ApiImplicitParam({ name: 'id', description: 'Id', required: true, enum: 'flat-rate' })
   getOneShippingMethod(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -20,7 +20,7 @@ export class ShippingMethodController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all shipping zones' })
+  @ApiOperation({ title: 'List all shipping zones' })
   getAllShippingMethod(@Param() params, @Res() res) {
 
     let method = 'get';

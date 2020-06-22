@@ -1,5 +1,5 @@
 import { Controller, Get, Res, Post, Body, Param, Patch, Delete } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
+import { ApiOperation, ApiImplicitParam, ApiUseTags } from "@nestjs/swagger";
 import { getWoocommerce } from "../../common/function/basic-function";
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from "./dto/update-order.dto";
@@ -7,10 +7,10 @@ import { DeleteDto } from "../../common/dto/delete.dto";
 const api = getWoocommerce();
 
 @Controller('orders')
-@ApiTags('Orders')
+@ApiUseTags('Orders')
 export class OrderController {
   @Post()
-  @ApiOperation({ summary: 'Create an order' })
+  @ApiOperation({ title: 'Create an order' })
   createOrder(@Body() data: CreateOrderDto, @Res() res) {
     api.post('Orders', data)
       .then((response) => {
@@ -24,8 +24,8 @@ export class OrderController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve an order' })
-  @ApiParam({ name: 'id', description: 'order id', required: true })
+  @ApiOperation({ title: 'Retrieve an order' })
+  @ApiImplicitParam({ name: 'id', description: 'order id', required: true })
   getOneOrder(@Param('id') id, @Res() res) {
 
     // List products
@@ -44,7 +44,7 @@ export class OrderController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all orders' })
+  @ApiOperation({ title: 'List all orders' })
   getAllOrder(@Res() res) {
 
 
@@ -76,8 +76,8 @@ export class OrderController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update an order' })
-  @ApiParam({ name: 'id', description: 'order id', required: true })
+  @ApiOperation({ title: 'Update an order' })
+  @ApiImplicitParam({ name: 'id', description: 'order id', required: true })
   updateOrder(@Body() data: UpdateOrderDto, @Param('id') id, @Res() res) {
     api.put("Orders/" + id, data)
       .then((response) => {
@@ -91,8 +91,8 @@ export class OrderController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete an order' })
-  @ApiParam({ name: 'id', description: 'order id', required: true })
+  @ApiOperation({ title: 'Delete an order' })
+  @ApiImplicitParam({ name: 'id', description: 'order id', required: true })
   deleteOrder(@Body() data: DeleteDto, @Param('id') id, @Res() res) {
     api.delete("Orders/" + id, data)
       .then((response) => {
@@ -106,7 +106,7 @@ export class OrderController {
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update orders' })
+  @ApiOperation({ title: 'Batch update orders' })
   batchUpdateOrder(@Body() data, @Res() res) {
     api.post('Orders/batch', data)
       .then((response) => {

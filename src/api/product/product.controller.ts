@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Res, Get, Param, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Products')
+@ApiUseTags('Products')
 @Controller('products')
 export class ProductController {
   @Post()
-  @ApiOperation({ summary: 'Create a product' })
+  @ApiOperation({ title: 'Create a product' })
   createproduct(@Body() data: any, @Res() res) {
     const data1 = {
       name: "Premium Quality",
@@ -52,8 +52,8 @@ export class ProductController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a product' })
-  @ApiParam({ name: 'id', description: 'product id', required: true })
+  @ApiOperation({ title: 'Retrieve a product' })
+  @ApiImplicitParam({ name: 'id', description: 'product id', required: true })
   getOneproduct(@Param('id') id, @Res() res) {
 
     let method = 'get';
@@ -79,7 +79,7 @@ export class ProductController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all products' })
+  @ApiOperation({ title: 'List all products' })
   getAllproduct(@Res() res) {
 
     let method = 'get';
@@ -92,8 +92,8 @@ export class ProductController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a product' })
-  @ApiParam({ name: 'id', description: 'product id', required: true })
+  @ApiOperation({ title: 'Update a product' })
+  @ApiImplicitParam({ name: 'id', description: 'product id', required: true })
   updateproduct(@Body() data: any, @Param('id') id, @Res() res) {
     const data1 = {
       regular_price: "24.54"
@@ -118,8 +118,8 @@ export class ProductController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a product' })
-  @ApiParam({ name: 'id', description: 'product id', required: true })
+  @ApiOperation({ title: 'Delete a product' })
+  @ApiImplicitParam({ name: 'id', description: 'product id', required: true })
   deleteproduct(@Body() data: DeleteDto, @Param('id') id, @Res() res) {
     const data1 = {
       force: true
@@ -134,7 +134,7 @@ export class ProductController {
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update products' })
+  @ApiOperation({ title: 'Batch update products' })
   batchUpdateproduct(@Body() data, @Res() res) {
     const data1 = {
       create: [

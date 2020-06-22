@@ -1,13 +1,13 @@
 import { Controller, Get, Param, Res } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { runServiceQueryV1 } from "../../common/function/basic-function";
 
-@ApiTags('Subscription order')
+@ApiUseTags('Subscription order')
 @Controller('subscription-order')
 export class SubscriptionOrderController {
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a subscription orders' })
-  @ApiParam({ name: 'id', description: 'subscription id', required: true })
+  @ApiOperation({ title: 'Retrieve a subscription orders' })
+  @ApiImplicitParam({ name: 'id', description: 'subscription id', required: true })
   getSubscriptionOrder(@Param('id') id, @Res() res) {
 
     let method = 'get';

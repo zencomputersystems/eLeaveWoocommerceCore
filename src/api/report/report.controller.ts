@@ -1,12 +1,12 @@
 import { Controller, Get, Res } from "@nestjs/common";
-import { ApiTags, ApiOperation } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 
-@ApiTags('Report')
+@ApiUseTags('Report')
 @Controller('report')
 export class ReportController {
   @Get()
-  @ApiOperation({ summary: 'List all reports' })
+  @ApiOperation({ title: 'List all reports' })
   getAllReports(@Res() res) {
 
     let method = 'get';
@@ -19,7 +19,7 @@ export class ReportController {
   }
 
   @Get('sales')
-  @ApiOperation({ summary: 'Retrieve sales report' })
+  @ApiOperation({ title: 'Retrieve sales report' })
   getSalesReport(@Res() res) {
 
     let method = 'get';
@@ -35,7 +35,7 @@ export class ReportController {
   }
 
   @Get('top-seller')
-  @ApiOperation({ summary: 'Retrieve top sellers report' })
+  @ApiOperation({ title: 'Retrieve top sellers report' })
   getTopSellersReport(@Res() res) {
 
     let method = 'get';
@@ -50,7 +50,7 @@ export class ReportController {
   }
 
   @Get('coupons-total')
-  @ApiOperation({ summary: 'Retrieve coupons totals' })
+  @ApiOperation({ title: 'Retrieve coupons totals' })
   getCouponsTotal(@Res() res) {
 
     let method = 'get';
@@ -63,7 +63,7 @@ export class ReportController {
   }
 
   @Get('customers-total')
-  @ApiOperation({ summary: 'Retrieve customers totals' })
+  @ApiOperation({ title: 'Retrieve customers totals' })
   getCustomersTotal(@Res() res) {
 
     let method = 'get';
@@ -76,7 +76,7 @@ export class ReportController {
   }
 
   @Get('orders-total')
-  @ApiOperation({ summary: 'Retrieve orders totals' })
+  @ApiOperation({ title: 'Retrieve orders totals' })
   getOrdersTotal(@Res() res) {
 
     let method = 'get';
@@ -89,7 +89,7 @@ export class ReportController {
   }
 
   @Get('products-total')
-  @ApiOperation({ summary: 'Retrieve products totals' })
+  @ApiOperation({ title: 'Retrieve products totals' })
   getProductsTotal(@Res() res) {
 
     let method = 'get';
@@ -102,7 +102,7 @@ export class ReportController {
   }
 
   @Get('reviews-total')
-  @ApiOperation({ summary: 'Retrieve customers totals' })
+  @ApiOperation({ title: 'Retrieve customers totals' })
   getReviewssTotal(@Res() res) {
 
     let method = 'get';

@@ -1,5 +1,5 @@
 import { Controller, Get, Res, Post, Body, Param, Patch, Delete } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
+import { ApiOperation, ApiImplicitParam, ApiUseTags } from "@nestjs/swagger";
 import { getWoocommerce } from "../../common/function/basic-function";
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from "./dto/update-customer.dto";
@@ -7,10 +7,10 @@ import { DeleteCustomerDto } from './dto/delete-customer.dto';
 const api = getWoocommerce();
 
 @Controller('customers')
-@ApiTags('Customers')
+@ApiUseTags('Customers')
 export class CustomerController {
   @Post()
-  @ApiOperation({ summary: 'Create a customer' })
+  @ApiOperation({ title: 'Create a customer' })
   createCustomer(@Body() data: CreateCustomerDto, @Res() res) {
     api.post('customers', data)
       .then((response) => {
@@ -24,8 +24,8 @@ export class CustomerController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a customer' })
-  @ApiParam({ name: 'id', description: 'customer id', required: true })
+  @ApiOperation({ title: 'Retrieve a customer' })
+  @ApiImplicitParam({ name: 'id', description: 'customer id', required: true })
   getOneCustomer(@Param('id') id, @Res() res) {
 
     // List products
@@ -44,7 +44,7 @@ export class CustomerController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all customers' })
+  @ApiOperation({ title: 'List all customers' })
   getAllCustomer(@Res() res) {
 
     api.get("customers", {
@@ -74,8 +74,8 @@ export class CustomerController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a customer' })
-  @ApiParam({ name: 'id', description: 'customer id', required: true })
+  @ApiOperation({ title: 'Update a customer' })
+  @ApiImplicitParam({ name: 'id', description: 'customer id', required: true })
   updateCustomer(@Body() data: UpdateCustomerDto, @Param('id') id, @Res() res) {
     api.put("customers/" + id, data)
       .then((response) => {
@@ -89,8 +89,8 @@ export class CustomerController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a customer' })
-  @ApiParam({ name: 'id', description: 'customer id', required: true })
+  @ApiOperation({ title: 'Delete a customer' })
+  @ApiImplicitParam({ name: 'id', description: 'customer id', required: true })
   deleteCustomer(@Body() data: DeleteCustomerDto, @Param('id') id, @Res() res) {
     api.delete("customers/" + id, data)
       .then((response) => {
@@ -104,7 +104,7 @@ export class CustomerController {
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update customers' })
+  @ApiOperation({ title: 'Batch update customers' })
   batchUpdateCustomer(@Body() data, @Res() res) {
     api.post('customers/batch', data)
       .then((response) => {
@@ -118,8 +118,8 @@ export class CustomerController {
   }
 
   @Get('downloads/:id')
-  @ApiOperation({ summary: 'Retrieve customer downloads' })
-  @ApiParam({ name: 'id', description: 'customer id', required: true })
+  @ApiOperation({ title: 'Retrieve customer downloads' })
+  @ApiImplicitParam({ name: 'id', description: 'customer id', required: true })
   getCustomerDownload(@Param('id') id, @Res() res) {
 
     // List products

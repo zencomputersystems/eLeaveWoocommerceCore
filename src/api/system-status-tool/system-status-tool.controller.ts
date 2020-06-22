@@ -1,13 +1,13 @@
 import { Controller, Get, Param, Res, Patch, Body } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { runServiceQuery } from "../../common/function/basic-function";
 
-@ApiTags('System status tool')
+@ApiUseTags('System status tool')
 @Controller('system-status-tool')
 export class SystemStatusToolController {
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a tool from system status' })
-  @ApiParam({ name: 'id', description: 'Product id', required: true, example: 'clear_transients' })
+  @ApiOperation({ title: 'Retrieve a tool from system status' })
+  @ApiImplicitParam({ name: 'id', description: 'Product id', required: true, enum: 'clear_transients' })
   getOneShippingZone(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -20,7 +20,7 @@ export class SystemStatusToolController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all tools from system status' })
+  @ApiOperation({ title: 'List all tools from system status' })
   getAllShippingZones(@Res() res) {
 
     let method = 'get';
@@ -33,8 +33,8 @@ export class SystemStatusToolController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Run a tool from system status' })
-  @ApiParam({ name: 'id', description: 'Zone id', required: true, example: 'clear_transients' })
+  @ApiOperation({ title: 'Run a tool from system status' })
+  @ApiImplicitParam({ name: 'id', description: 'Zone id', required: true, enum: 'clear_transients' })
   updateSystemStatus(@Body() data: any, @Param() params, @Res() res) {
     const data1 = {
       confirm: true

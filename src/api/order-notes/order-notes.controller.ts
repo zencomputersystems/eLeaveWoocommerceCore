@@ -1,15 +1,15 @@
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { Controller, Post, Res, Param, Body, Get, Delete } from "@nestjs/common";
 import { runServiceQuery } from '../../common/function/basic-function';
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Order notes')
+@ApiUseTags('Order notes')
 @Controller('order-notes')
 export class OrderNotesController {
 
   @Post(':id')
-  @ApiOperation({ summary: 'Create an order note' })
-  @ApiParam({ name: 'id', description: 'Order id', required: true })
+  @ApiOperation({ title: 'Create an order note' })
+  @ApiImplicitParam({ name: 'id', description: 'Order id', required: true })
   createOrderNote(@Param('id') id, @Body() data: any, @Res() res) {
     const data1 = {
       note: "Order ok!!!"
@@ -31,9 +31,9 @@ export class OrderNotesController {
   }
 
   @Get(':id/:note_id')
-  @ApiOperation({ summary: 'Retrieve an order note' })
-  @ApiParam({ name: 'id', description: 'Order id', required: true })
-  @ApiParam({ name: 'note_id', description: 'Notes id', required: true })
+  @ApiOperation({ title: 'Retrieve an order note' })
+  @ApiImplicitParam({ name: 'id', description: 'Order id', required: true })
+  @ApiImplicitParam({ name: 'note_id', description: 'Notes id', required: true })
   getOneOrderNotes(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -58,8 +58,8 @@ export class OrderNotesController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'List all order notes' })
-  @ApiParam({ name: 'id', description: 'Order id', required: true })
+  @ApiOperation({ title: 'List all order notes' })
+  @ApiImplicitParam({ name: 'id', description: 'Order id', required: true })
   getAllOrderNotes(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -97,9 +97,9 @@ export class OrderNotesController {
   }
 
   @Delete(':id/:note_id')
-  @ApiOperation({ summary: 'Delete an order note' })
-  @ApiParam({ name: 'id', description: 'Order notes id', required: true })
-  @ApiParam({ name: 'note_id', description: 'Notes id', required: true })
+  @ApiOperation({ title: 'Delete an order note' })
+  @ApiImplicitParam({ name: 'id', description: 'Order notes id', required: true })
+  @ApiImplicitParam({ name: 'note_id', description: 'Notes id', required: true })
   deleteOrderNotes(@Param() params, @Body() data: DeleteDto, @Res() res) {
 
     let method = 'delete';

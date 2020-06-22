@@ -1,12 +1,12 @@
 import { Controller, Get, Res, Param } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { runServiceQuery } from "../../common/function/basic-function";
 
-@ApiTags('Data')
+@ApiUseTags('Data')
 @Controller('data')
 export class DataController {
   @Get()
-  @ApiOperation({ summary: 'List all data' })
+  @ApiOperation({ title: 'List all data' })
   getAllData(@Res() res) {
 
     let method = 'get';
@@ -19,7 +19,7 @@ export class DataController {
   }
 
   @Get('continent')
-  @ApiOperation({ summary: 'List all continents' })
+  @ApiOperation({ title: 'List all continents' })
   getAllContinent(@Res() res) {
 
     let method = 'get';
@@ -32,8 +32,8 @@ export class DataController {
   }
 
   @Get('continent/:id')
-  @ApiOperation({ summary: 'Retrieve continent data' })
-  @ApiParam({ name: 'id', description: 'Location', required: true, example: 'eu' })
+  @ApiOperation({ title: 'Retrieve continent data' })
+  @ApiImplicitParam({ name: 'id', description: 'Location', required: true, enum: 'eu' })
   getOneContinent(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -46,7 +46,7 @@ export class DataController {
   }
 
   @Get('country')
-  @ApiOperation({ summary: 'List all country' })
+  @ApiOperation({ title: 'List all country' })
   getAllCountry(@Res() res) {
 
     let method = 'get';
@@ -59,8 +59,8 @@ export class DataController {
   }
 
   @Get('country/:id')
-  @ApiOperation({ summary: 'Retrieve country data' })
-  @ApiParam({ name: 'id', description: 'Location', required: true, example: 'br' })
+  @ApiOperation({ title: 'Retrieve country data' })
+  @ApiImplicitParam({ name: 'id', description: 'Location', required: true, enum: 'br' })
   getOneCountry(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -73,7 +73,7 @@ export class DataController {
   }
 
   @Get('currency')
-  @ApiOperation({ summary: 'List all currency' })
+  @ApiOperation({ title: 'List all currency' })
   getAllCurrency(@Res() res) {
 
     let method = 'get';
@@ -86,8 +86,8 @@ export class DataController {
   }
 
   @Get('currency/:id')
-  @ApiOperation({ summary: 'Retrieve currency data' })
-  @ApiParam({ name: 'id', description: 'Currency', required: true, example: 'brl' })
+  @ApiOperation({ title: 'Retrieve currency data' })
+  @ApiImplicitParam({ name: 'id', description: 'Currency', required: true, enum: 'brl' })
   getOneCurrency(@Param() params, @Res() res) {
 
     let method = 'get';
@@ -100,7 +100,7 @@ export class DataController {
   }
 
   @Get('currency/current')
-  @ApiOperation({ summary: 'Retrieve current currency' })
+  @ApiOperation({ title: 'Retrieve current currency' })
   getCurrentCurrency(@Res() res) {
 
     let method = 'get';

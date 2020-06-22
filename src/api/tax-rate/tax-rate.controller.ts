@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Res, Get, Param, Patch, Delete } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ApiUseTags, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 import { runServiceQuery } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 
-@ApiTags('Tax rate')
+@ApiUseTags('Tax rate')
 @Controller('tax-rate')
 export class TaxRateController {
   @Post()
-  @ApiOperation({ summary: 'Create a tax rate' })
+  @ApiOperation({ title: 'Create a tax rate' })
   createTaxRate(@Body() data: any, @Res() res) {
     const data1 = {
       country: "US",
@@ -26,8 +26,8 @@ export class TaxRateController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a tax rate' })
-  @ApiParam({ name: 'id', description: 'tax rate id', required: true })
+  @ApiOperation({ title: 'Retrieve a tax rate' })
+  @ApiImplicitParam({ name: 'id', description: 'tax rate id', required: true })
   getOneTaxRate(@Param('id') id, @Res() res) {
 
     let method = 'get';
@@ -40,7 +40,7 @@ export class TaxRateController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List all tax rates' })
+  @ApiOperation({ title: 'List all tax rates' })
   getAllTaxRate(@Res() res) {
 
     let method = 'get';
@@ -53,8 +53,8 @@ export class TaxRateController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a tax rate' })
-  @ApiParam({ name: 'id', description: 'tax rate id', required: true })
+  @ApiOperation({ title: 'Update a tax rate' })
+  @ApiImplicitParam({ name: 'id', description: 'tax rate id', required: true })
   updateTaxRate(@Body() data: any, @Param('id') id, @Res() res) {
     const data1 = {
       name: "US Tax"
@@ -69,8 +69,8 @@ export class TaxRateController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a tax rate' })
-  @ApiParam({ name: 'id', description: 'tax rate id', required: true })
+  @ApiOperation({ title: 'Delete a tax rate' })
+  @ApiImplicitParam({ name: 'id', description: 'tax rate id', required: true })
   deleteTaxRate(@Body() data: DeleteDto, @Param('id') id, @Res() res) {
     const data1 = {
       force: true
@@ -85,7 +85,7 @@ export class TaxRateController {
   }
 
   @Post('batch')
-  @ApiOperation({ summary: 'Batch update tax rates' })
+  @ApiOperation({ title: 'Batch update tax rates' })
   batchUpdateTaxRate(@Body() data, @Res() res) {
     const data1 = {
       create: [
