@@ -3,14 +3,15 @@ import { ApiUseTags, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { runServiceQueryV1 } from "../../common/function/basic-function";
 import { DeleteDto } from "../../common/dto/delete.dto";
 import { UpdateSubscriptionDto } from "./dto/update-subscription.dto";
+import { CreateSubscriptionDto } from "./dto/create-subscription.dto";
 
 @ApiUseTags('Subscription')
 @Controller('subscription')
 export class SubscriptionController {
   @Post()
   @ApiOperation({ title: 'Create a subscription' })
-  createSubscription(@Body() data: any, @Res() res) {
-    const data1 = {
+  createSubscription(@Body() data: CreateSubscriptionDto, @Res() res) {
+    let data1 = {
       customer_id: 1,
       status: 'active',
       billing_period: 'month',
@@ -66,9 +67,11 @@ export class SubscriptionController {
       ]
     };
 
+    // data1 = data;
+
     let method = 'post';
     let endpoint = 'subscriptions';
-    let dataQuery = data1;
+    let dataQuery = data;
     let paramQuery = {};
 
     runServiceQueryV1([method, endpoint, dataQuery, paramQuery, res]);
