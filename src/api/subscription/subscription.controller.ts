@@ -104,6 +104,19 @@ export class SubscriptionController {
 
   }
 
+  @Get('customer/:customer_id')
+  @ApiOperation({ title: 'List all subscriptions by customer' })
+  @ApiImplicitParam({ name: 'customer_id', description: 'Customer id' })
+  getSubsByCustomer(@Param() param, @Res() res) {
+    let method = 'get';
+    let endpoint = 'subscriptions';
+    let dataQuery = {};
+    let paramQuery = { customer: param.customer_id };
+
+    runServiceQueryV1([method, endpoint, dataQuery, paramQuery, res]);
+
+  }
+
   @Patch(':id')
   @ApiOperation({ title: 'Update a subscription' })
   @ApiImplicitParam({ name: 'id', description: 'Subscription id', required: true })
